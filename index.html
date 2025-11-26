@@ -36,21 +36,21 @@
         
 
         <!-- Filtro de Gêneros -->
-        <label for="genre-select">Escolha o Gênero:</label>
-        <select id="genre-select">
-            <option value="">Todos</option>
-            <option value="action">Ação</option>
-            <option value="adventure">Aventura</option>
-            <option value="romance">Romance</option>
-            <option value="comedy">Comédia</option>
-            <option value="school">Escolar</option>
-            <option value="drama">Drama</option>
-            <option value="horror">Terror</option>
-            <option value="supernatural">Sobrenatural</option>
-            <option value="shounen">Shounen</option>
-            <option value="fantasy">Fantasia</option>
-            <option value="sci-fi">Sci-Fi</option>
-        </select><br><br>
+       <div class="genre-container">
+    <p class="genre-title">Escolha um Gênero:</p>
+    <div class="genre-grid" id="genre-options">
+        <button class="genre-btn active" data-value="">Todos</button>
+        <button class="genre-btn" data-value="action">Ação</button>
+        <button class="genre-btn" data-value="adventure">Aventura</button>
+        <button class="genre-btn" data-value="romance">Romance</button>
+        <button class="genre-btn" data-value="comedy">Comédia</button>
+        <button class="genre-btn" data-value="drama">Drama</button>
+        <button class="genre-btn" data-value="horror">Terror</button>
+        <button class="genre-btn" data-value="supernatural">Sobrenatural</button>
+        <button class="genre-btn" data-value="fantasy">Fantasia</button>
+        <button class="genre-btn" data-value="sci-fi">Sci-Fi</button>
+    </div>
+</div>
 
        <button id="anime-button">Gerar Anime</button>
 <div id="loadingSpinner" style="display:none;">
