@@ -388,3 +388,149 @@ select option {
     width: 100px;
     height: auto;
 }
+/* --- INÍCIO DO CÓDIGO DARK MODE --- */
+
+/* 1. Definindo as cores padrão (Modo Claro) */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #333333;
+  --header-bg: #f1683a;
+  --header-text: #ffffff;
+  --card-bg: #f9f9f9;
+  --molho-color: #f1683a;
+  --btn-bg: #f1683a;
+  --btn-text: #ffffff;
+}
+
+/* 2. Definindo as cores do Modo Escuro */
+[data-theme="dark"] {
+  --bg-color: #1a1a1a;        /* Cinza bem escuro para o fundo */
+  --text-color: #f0f0f0;      /* Branco suave para o texto */
+  --header-bg: #2d2d2d;       /* Cinza chumbo para o header */
+  --header-text: #f1683a;     /* Laranja no texto do header */
+  --card-bg: #333333;         /* Cinza para cartões/inputs */
+  --molho-color: #ff8c69;     /* Um laranja mais claro para ler melhor no escuro */
+  --btn-bg: #f1683a;
+  --btn-text: #ffffff;
+}
+
+/* 3. Aplicando as variáveis no seu layout */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s; /* Transição suave */
+}
+
+.header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  /* Mantenha o resto do seu CSS .header aqui... */
+}
+
+.molho {
+  color: var(--molho-color);
+}
+
+select {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid #555;
+}
+
+select option {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+}
+
+footer {
+  background-color: var(--bg-color); /* Footer acompanha o tema */
+  color: var(--text-color);
+}
+
+.theme-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  font-size: 1.2rem; /* Diminuí levemente para caber melhor */
+  
+  /* Tamanho fixo para ficar uma bolinha perfeita */
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: transform 0.2s, background 0.2s;
+  z-index: 101;
+
+  /* --- AQUI ESTÁ A CORREÇÃO --- */
+  /* No celular, fica à esquerda do hambúrguer */
+  right: 4.5rem; 
+}
+
+/* No computador (quando o hambúrguer some), o botão pode ir para o cantinho */
+@media only screen and (min-width: 48rem) {
+  .theme-btn {
+    right: 2rem;
+  }
+}
+
+.theme-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  background: rgba(255,255,255,0.1);
+}
+
+
+.theme-btn:hover {
+  transform: translateY(-50%) scale(1.1);
+  background: rgba(255,255,255,0.1);
+}
+
+/* --- FIM DO CÓDIGO DARK MODE --- */
+.theme-btn svg {
+  width: 1.5rem;  /* Tamanho do ícone */
+  height: 1.5rem;
+  fill: none;     /* Sem preenchimento, apenas contorno */
+  stroke: currentColor; /* Pega a cor do texto definida no pai */
+  stroke-width: 2; /* Espessura da linha */
+}
+/* Estilo do botão e do ícone SVG */
+.theme-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 101;
+  right: 4.5rem; /* Posição Mobile */
+  color: var(--header-text); /* Garante que o ícone pegue a cor certa */
+}
+
+@media only screen and (min-width: 48rem) {
+  .theme-btn {
+    right: 2rem; /* Posição PC */
+  }
+}
+
+.theme-btn svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  pointer-events: none; /* Evita bugs de clique no ícone */
+}
+
