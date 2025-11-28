@@ -5,18 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniSurprise</title>
     <link rel="shortcut icon" href="https://i.ibb.co/hcJpBvR/logo8-23-222313-removebg-preview.png" type="image/x-icon">
-    <link rel="stylesheet" href="src/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header" id="header">
-<button id="theme-toggle" class="theme-btn" aria-label="Alternar Tema"></button>
+        <header class="header" id="header">
+        <button id="theme-toggle" class="theme-btn" aria-label="Alternar Tema"></button>
         <nav class="navbar container">
             <a href="#" class="brand">AniSurprise</a>
             <div class="menu" id="menu">
                 <ul class="menu-inner">
+                    <li class="menu-item">
+                        <a href="manga.html" class="menu-link" style="color: yellow;">Ler Mangás</a>
+                    </li>
+
                     <li class="menu-item"><a href="https://www.instagram.com/daarkozzy?igsh=MWdyc25kdTViOTg2ZA==" class="menu-link">Instagram</a></li>
                     <li class="menu-item"><a href="https://github.com/Daarkozzy" class="menu-link">Github</a></li>
-                    <li class="menu-item"><a href="#" class="menu-link"></a></li>
                 </ul>
             </div>
             <div class="burger" id="burger">
@@ -26,18 +29,17 @@
                 <span class="burger-line"></span>
             </div>
         </nav>
-        
-        
     </header>
+
 
     <main>
         <h2 class="molho">Olá, Seja bem vindo ao Animes aleatórios</h2><br>
         <h3>Sem ideia de animes para ver? Clica em animes aleatórios e descubra um anime novo para você assistir.</h3><br>
         
 
-        <!-- Filtro de Gêneros -->
-       <div class="genre-container">
-    <p class="genre-title">Escolha um Gênero:</p>
+        
+        <div class="genre-container">
+    <p class="genre-title">Escolha um estilo:</p>
     <div class="genre-grid" id="genre-options">
         <button class="genre-btn active" data-value="">Todos</button>
         <button class="genre-btn" data-value="action">Ação</button>
@@ -51,6 +53,7 @@
         <button class="genre-btn" data-value="sci-fi">Sci-Fi</button>
     </div>
 </div>
+
 
        <button id="anime-button">Gerar Anime</button>
 <div id="loadingSpinner" style="display:none;">
@@ -78,6 +81,6 @@
         </div>
     </footer>
 
-    <script src="src/script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
