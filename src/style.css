@@ -138,7 +138,7 @@ h3 {
   top: 50%;
   transform: translateY(-50%);
   z-index: 101;
-  right: 4.5rem; /* Posição Mobile (perto do burger) */
+  right: 4.5rem;
   color: var(--header-text);
   transition: transform 0.2s, background 0.2s;
 }
@@ -239,17 +239,17 @@ h3 {
     display: flex;
     align-items: center;
     gap: 15px;
-    background: rgba(241, 104, 58, 0.1); /* Fundo laranja bem transparente */
-    border: 1px solid rgba(241, 104, 58, 0.3); /* Borda sutil */
-    border-left: 4px solid #f1683a; /* Borda lateral grossa destaque */
+    background: rgba(241, 104, 58, 0.1);
+    border: 1px solid rgba(241, 104, 58, 0.3);
+    border-left: 4px solid #f1683a; 
     border-radius: 12px;
     padding: 15px 20px;
-    margin: 20px auto; /* Centraliza */
-    max-width: 600px; /* Mesma largura dos cards */
+    margin: 20px auto; 
+    max-width: 600px; 
     width: 90%;
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(5px); /* Efeito de vidro */
+    backdrop-filter: blur(5px); 
 }
 
 .warning-box:hover {
@@ -260,8 +260,8 @@ h3 {
 .warning-icon svg {
     width: 32px;
     height: 32px;
-    fill: #f1683a; /* Cor do ícone */
-    animation: pulse 2s infinite; /* Animação de pulsar */
+    fill: #f1683a; 
+    animation: pulse 2s infinite;
 }
 
 .warning-content {
@@ -270,14 +270,14 @@ h3 {
 }
 
 .warning-content strong {
-    color: #f1683a; /* Título laranja */
+    color: #f1683a;
     font-size: 0.95rem;
     margin-bottom: 2px;
     font-family: "Poppins", sans-serif;
 }
 
 .warning-content p {
-    color: var(--text-color); /* Usa a cor do texto do seu tema (branco/preto) */
+    color: var(--text-color);
     font-size: 0.85rem;
     margin: 0;
     opacity: 0.8;
