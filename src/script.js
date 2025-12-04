@@ -3,19 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     /* =================================================================
        1. LÓGICA DE SELEÇÃO DE GÊNERO (NOVOS BOTÕES/CHIPS)
     ================================================================= */
-    let currentGenre = ""; // Variável que guarda o gênero escolhido
+    let currentGenre = ""; 
     const genreButtons = document.querySelectorAll('.genre-btn');
     
-    // Adiciona o evento de clique em cada botão de gênero
     genreButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-            // Remove a classe 'active' de todos os botões (apaga o laranja)
+           
             genreButtons.forEach(b => b.classList.remove('active'));
             
-            // Adiciona 'active' apenas no botão clicado (acende o laranja)
             btn.classList.add('active');
             
-            // Atualiza a variável com o valor do gênero (ex: "horror", "action")
             currentGenre = btn.getAttribute('data-value');
         });
     });
@@ -31,29 +28,25 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             let anime;
             let attempts = 0;
-            const maxAttempts = 15; // Tenta 15 vezes achar o gênero antes de desistir
+            const maxAttempts = 15;
 
             do {
                 attempts++;
-                // Busca um anime aleatório na API
                 const response = await fetch('https://api.jikan.moe/v4/random/anime');
                 
                 if (!response.ok) throw new Error('Erro na API');
                 
                 const data = await response.json();
                 anime = data.data;
-
-                // FILTRAGEM: Verifica se o anime tem o gênero escolhido
                 if (genre && anime.genres) {
                     const hasGenre = anime.genres.some(g => g.name.toLowerCase() === genre.toLowerCase());
-                    // Se não tiver o gênero, descarta e tenta de novo
+                   
                     if (!hasGenre) anime = null;
                 }
                 
-                // Se atingir o limite de tentativas, para para não travar o site
                 if (attempts >= maxAttempts) return null;
 
-            } while (!anime || anime.type !== 'TV'); // Garante que seja uma série de TV (não filme/OVA)
+            } while (!anime || anime.type !== 'TV');
 
             return anime;
         } catch (error) {
@@ -64,15 +57,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function showRandomAnime() {
         if(!animeButton) return;
-
-        // Mostra o spinner e limpa o container anterior
         if (loadingSpinner) loadingSpinner.style.display = 'block';
         if (animeContainer) animeContainer.innerHTML = ''; 
 
-        // Chama a função de busca passando o gênero selecionado nos botões
         const anime = await fetchRandomAnimeWithFilter(currentGenre);
         
-        // Exibe o resultado na tela
         if (anime && animeContainer) {
             animeContainer.innerHTML = `
                 <h2>${anime.title}</h2>
@@ -84,12 +73,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 </div>
             `;
         } else if (animeContainer) {
-            // Mensagem caso não encontre nada após 15 tentativas
             const genreName = currentGenre ? `de ${currentGenre}` : "";
             animeContainer.innerHTML = `<p>Puxa, não encontrei um anime ${genreName} legal agora. Tente clicar novamente!</p>`;
         }
         
-        // Esconde o spinner
         if (loadingSpinner) loadingSpinner.style.display = 'none';
     }
 
@@ -109,8 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
             navbarMenu.classList.toggle("is-active");
         });
     }
-
-    // Fecha o menu ao clicar em um link
     document.querySelectorAll(".menu-link").forEach((link) => {
         link.addEventListener("click", () => {
             if(burgerMenu) burgerMenu.classList.remove("is-active");
@@ -137,11 +122,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateIcon(theme) {
         if (!toggleBtn) return;
-        // Se for dark, mostra o Sol. Se for light, mostra a Lua.
         toggleBtn.innerHTML = theme === "dark" ? sunIcon : moonIcon;
     }
 
-    // Verifica preferência salva ou do sistema
     const savedTheme = localStorage.getItem("theme");
     
     if (savedTheme) {
@@ -157,7 +140,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Evento de clique no botão de tema
     if (toggleBtn) {
         toggleBtn.addEventListener("click", () => {
             const currentTheme = html.getAttribute("data-theme");
