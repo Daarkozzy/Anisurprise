@@ -68,9 +68,7 @@ main {
   padding: 2rem;
   padding-top: 6.25rem; 
   width: 100%;
-  flex: 1; /* Empurra o rodapé para baixo */
-  
-  /* CORREÇÃO: Espaço extra no final para o footer não cobrir a imagem */
+  flex: 1;
   padding-bottom: 5rem; 
 }
 
@@ -313,7 +311,7 @@ h3 {
   transform: scale(1.05);
 }
 
-/* CORREÇÃO: Spinner agora respeita o fluxo (não fica em cima do botão) */
+
 #loadingSpinner {
     display: none; 
     margin: 20px auto; 
@@ -331,38 +329,38 @@ h3 {
   width: 90%;
   max-width: 600px;
   margin: 20px auto 0 auto;
-  min-height: 200px; /* Evita pulos na tela */
+  min-height: 200px; 
 }
 
-/* CORREÇÃO: Limita o tamanho da imagem */
+
 #anime-container img {
     max-width: 100%;
     height: auto;
-    max-height: 400px; /* Não deixa ficar gigante no celular */
+    max-height: 400px; 
     object-fit: contain;
     border-radius: 10px;
 }
 
 .gif {
-  position: fixed;      /* O segredo: Fixa em relação à JANELA do navegador */
-  bottom: 0;            /* Cola no chão da tela */
-  right: 1rem;          /* Dá uma pequena margem da direita (aprox 16px) */
-  z-index: 999;         /* Garante que fique NA FRENTE de tudo (rodapé, fundo, etc) */
-  pointer-events: none; /* MUITO IMPORTANTE: Deixa você clicar "através" da imagem */
-  width: auto;          /* Ajuste automático de largura */
+  position: fixed;     
+  bottom: 0;            
+  right: 1rem;         
+  z-index: 999;         
+  pointer-events: none; 
+  width: auto;          
 }
 
 .gif img {
-    width: 120px;       /* Tamanho da menina. Aumente ou diminua aqui se quiser */
+    width: 120px;       
     height: auto;
-    display: block;     /* Remove espaços fantasmas abaixo da imagem */
+    display: block;     
 }
 
-/* Dica Extra: Se no celular ela atrapalhar o texto, você pode esconder ou diminuir assim: */
+
 @media only screen and (max-width: 480px) {
     .gif img {
-        width: 80px; /* Menor no celular */
-        opacity: 0.8; /* Um pouco transparente pra não atrapalhar a leitura */
+        width: 80px; 
+        opacity: 0.8; 
     }
 }
 
@@ -378,8 +376,6 @@ footer {
   width: 100%;
   color: var(--text-color);
   font-size: 0.8rem;
-  
-  /* CORREÇÃO: Fica no fluxo normal da página */
   position: relative;
   margin-top: auto;
 }
@@ -425,9 +421,7 @@ footer {
     column-gap: 1.25rem;
   }
 
-  .burger { display: none; }
-  
-  /* Ajuste do botão de tema no PC */
+  .burger { display: none; 
   .theme-btn { right: 2rem; }
 }
 
