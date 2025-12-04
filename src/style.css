@@ -232,6 +232,79 @@ h3 {
 .burger.is-active .burger-line:nth-child(2) { opacity: 0; visibility: hidden; }
 .burger.is-active .burger-line:nth-child(3) { top: 0.5rem; transform: rotate(-135deg); }
 
+/* =========================================
+   ESTILO DO AVISO (WARNING BOX)
+   ========================================= */
+.warning-box {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(241, 104, 58, 0.1); /* Fundo laranja bem transparente */
+    border: 1px solid rgba(241, 104, 58, 0.3); /* Borda sutil */
+    border-left: 4px solid #f1683a; /* Borda lateral grossa destaque */
+    border-radius: 12px;
+    padding: 15px 20px;
+    margin: 20px auto; /* Centraliza */
+    max-width: 600px; /* Mesma largura dos cards */
+    width: 90%;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(5px); /* Efeito de vidro */
+}
+
+.warning-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(241, 104, 58, 0.15);
+}
+
+.warning-icon svg {
+    width: 32px;
+    height: 32px;
+    fill: #f1683a; /* Cor do ícone */
+    animation: pulse 2s infinite; /* Animação de pulsar */
+}
+
+.warning-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.warning-content strong {
+    color: #f1683a; /* Título laranja */
+    font-size: 0.95rem;
+    margin-bottom: 2px;
+    font-family: "Poppins", sans-serif;
+}
+
+.warning-content p {
+    color: var(--text-color); /* Usa a cor do texto do seu tema (branco/preto) */
+    font-size: 0.85rem;
+    margin: 0;
+    opacity: 0.8;
+    line-height: 1.4;
+}
+
+/* Animação do ícone pulsando */
+@keyframes pulse {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.8; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* Ajuste para celular */
+@media only screen and (max-width: 480px) {
+    .warning-box {
+        padding: 12px;
+    }
+    .warning-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+    .warning-content p {
+        font-size: 0.75rem;
+    }
+}
+
 
 /* =========================================
    5. BOTÕES DE GÊNERO (TAGS/CHIPS)
