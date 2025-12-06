@@ -1,83 +1,162 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     /* =================================================================
-       1. LÓGICA DE SELEÇÃO DE GÊNERO (NOVOS BOTÕES/CHIPS)
+       1. VARIÁVEIS E SELEÇÃO DE GÊNERO
     ================================================================= */
     let currentGenre = ""; 
     const genreButtons = document.querySelectorAll('.genre-btn');
     
     genreButtons.forEach(btn => {
         btn.addEventListener('click', () => {
-           
             genreButtons.forEach(b => b.classList.remove('active'));
-            
             btn.classList.add('active');
-            
             currentGenre = btn.getAttribute('data-value');
         });
     });
 
     /* =================================================================
-       2. LÓGICA DO ANIME (API JIKAN)
+       2. FUNÇÃO DE TRADUÇÃO (Sinopse)
     ================================================================= */
-    const animeButton = document.getElementById('anime-button');
-    const animeContainer = document.getElementById('anime-container');
-    const loadingSpinner = document.getElementById('loadingSpinner');
+    async function traduzirTexto(textoIngles) {
+        if (!textoIngles) return "Sinopse indisponível.";
 
+        try {
+            // Limita o texto para 500 caracteres (limitação da API gratuita)
+            const textoParaTraduzir = textoIngles.substring(0, 500);
+            // API de tradução gratuita
+            const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(textoParaTraduzir)}&langpair=en|pt`;
+            
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            let textoTraduzido = data.responseData.translatedText;
+            if (textoIngles.length > 500) {
+                textoTraduzido += "... (leia mais no site oficial)";
+            }
+            return textoTraduzido;
+
+        } catch (error) {
+            console.error("Erro ao traduzir:", error);
+            // Retorna o original se a tradução falhar
+            return textoIngles;
+        }
+    }
+
+    /* =================================================================
+       3. LÓGICA DE DADOS (Função de busca aleatória)
+    ================================================================= */
+    
     async function fetchRandomAnimeWithFilter(genre) {
         try {
             let anime;
             let attempts = 0;
             const maxAttempts = 15;
-
             do {
                 attempts++;
                 const response = await fetch('https://api.jikan.moe/v4/random/anime');
-                
-                if (!response.ok) throw new Error('Erro na API');
-                
+                if (!response.ok) throw new Error('Erro API');
                 const data = await response.json();
                 anime = data.data;
+
                 if (genre && anime.genres) {
                     const hasGenre = anime.genres.some(g => g.name.toLowerCase() === genre.toLowerCase());
-                   
                     if (!hasGenre) anime = null;
                 }
-                
+                // Garante que é uma série de TV e não um filme, OVA, etc.
                 if (attempts >= maxAttempts) return null;
-
             } while (!anime || anime.type !== 'TV');
-
             return anime;
-        } catch (error) {
+        } catch (error) { 
             console.error('Erro ao buscar anime:', error);
-            return null;
+            return null; 
         }
     }
+
+    /* =================================================================
+       4. EXIBIÇÃO DO ANIME ALEATÓRIO (CARD PROFISSIONAL)
+    ================================================================= */
+    const animeButton = document.getElementById('anime-button');
+    const animeContainer = document.getElementById('anime-container');
+    const loadingSpinner = document.getElementById('loadingSpinner');
 
     async function showRandomAnime() {
         if(!animeButton) return;
         if (loadingSpinner) loadingSpinner.style.display = 'block';
+        
+        // Oculta o botão de gerar enquanto carrega
         if (animeContainer) animeContainer.innerHTML = ''; 
+        animeButton.style.display = 'none';
 
         const anime = await fetchRandomAnimeWithFilter(currentGenre);
         
         if (anime && animeContainer) {
+            const title = anime.title_english || anime.title;
+            const rawSynopsis = anime.synopsis ? anime.synopsis : "Sinopse indisponível.";
+            
+            // SINOPSE TRADUZIDA
+            const translatedSynopsis = await traduzirTexto(rawSynopsis);
+            
+            const year = anime.year || '?';
+            const genres = anime.genres ? anime.genres.map(g => g.name).join(', ') : 'N/A';
+            const score = anime.score || 'N/A';
+            const episodes = anime.episodes || '?';
+            const status = anime.status || 'N/A';
+            
+            // LÓGICA DO TRAILER (Link)
+            let trailerHTML = '';
+            if (anime.trailer && anime.trailer.url) {
+                trailerHTML = `
+                    <a href="${anime.trailer.url}" target="_blank" class="trailer-link" style="margin-right: 15px;">
+                        ▶️ Ver Trailer
+                    </a>
+                `;
+            }
+
             animeContainer.innerHTML = `
-                <h2>${anime.title}</h2>
-                <img src="${anime.images.jpg.large_image_url}" alt="${anime.title}" style="max-width: 100%; height: 300px; margin-top: 15px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.3);">
-                <div style="margin-top: 15px;">
-                    <p style="font-size: 1rem;">Nota: <strong>${anime.score || 'N/A'}</strong> ⭐</p>
-                    <p style="font-size: 0.9rem; opacity: 0.8;">Episódios: ${anime.episodes || '?'}</p>
-                    <p style="font-size: 0.8rem; margin-top: 5px; color: var(--header-bg);">${anime.year || ''}</p>
+                <div class="anime-card professional-card">
+                    <div class="card-image-wrapper">
+                        <img src="${anime.images.jpg.large_image_url}" alt="${title}" class="card-image">
+                    </div>
+
+                    <div class="card-content-wrapper">
+                        <div class="card-header">
+                            <h2>${title}</h2>
+                            
+                        </div>
+                        
+                        <div class="meta">
+                            <span>⭐ ${score}</span> |
+                            <span>${year}</span> |
+                            <span>${episodes} Ep.</span> |
+                            <span>${status}</span>
+                        </div>
+
+                        <div class="genres">
+                            <p><strong>Gêneros:</strong> ${genres}</p>
+                        </div>
+
+                        <div class="synopsis-box">
+                            <h3 style="margin-top: 15px;">Sinopse Traduzida</h3>
+                            <p class="synopsis-text">${translatedSynopsis}</p>
+                        </div>
+
+                        <div class="card-actions">
+                            ${trailerHTML}
+                            <a href="https://www.google.com/search?q=assistir+anime+${encodeURIComponent(title)}+legendado+ptbr" target="_blank" class="btn-link" style="width: 100%;">
+                                📺 Onde assistir?
+                            </a>
+                        </div>
+                    </div>
                 </div>
             `;
+            
         } else if (animeContainer) {
             const genreName = currentGenre ? `de ${currentGenre}` : "";
             animeContainer.innerHTML = `<p>Puxa, não encontrei um anime ${genreName} legal agora. Tente clicar novamente!</p>`;
         }
         
         if (loadingSpinner) loadingSpinner.style.display = 'none';
+        animeButton.style.display = 'block';
     }
 
     if (animeButton) {
@@ -85,7 +164,76 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     /* =================================================================
-       3. LÓGICA DO MENU HAMBÚRGUER (MOBILE)
+       5. LÓGICA SAZONAL E TOP 10 (RENDERING PROFISSIONAL)
+    ================================================================= */
+    function renderSeasonalCards(animeList, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+
+        container.innerHTML = ''; 
+
+        animeList.forEach(anime => {
+            const title = anime.title_english || anime.title;
+            const score = anime.score || 'N/A';
+            // Usando LARGE_IMAGE_URL para melhor qualidade no card
+            const image = anime.images.jpg.large_image_url; 
+            const episodes = anime.episodes || '?';
+            
+            // Define o tipo de informação a ser exibida (Score ou Data de Lançamento)
+            const infoBadge = containerId.includes('upcoming') 
+                ? `<span class="seasonal-release-badge">📅 ${anime.aired.string.split(' to ')[0].trim()}</span>` 
+                : `<span class="seasonal-score-badge">⭐ ${score}</span>`;
+
+            container.innerHTML += `
+                <div class="seasonal-card professional-seasonal-card">
+                    <img src="${image}" alt="${title}" class="seasonal-img">
+                    <div class="seasonal-content">
+                        <div class="seasonal-info-top">
+                            <h4 class="seasonal-title">${title}</h4>
+                        </div>
+                        <div class="seasonal-info-bottom">
+                            <p class="seasonal-episodes">Episódios: ${episodes}</p>
+                            ${infoBadge}
+                            <a href="https://myanimelist.net/anime/${anime.mal_id}" target="_blank" class="seasonal-link">Ver Detalhes</a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    // Função Genérica para buscar dados sazonais/futuros
+    async function fetchSeasonalData(endpoint, containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        // Limite para Top 10 e filtro para apenas séries de TV
+        const url = `https://api.jikan.moe/v4/seasons/${endpoint}?filter=tv&limit=10`;
+        
+        try {
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('Erro na API Jikan (Sazonal)');
+            
+            const data = await response.json();
+            renderSeasonalCards(data.data, containerId);
+
+        } catch (error) {
+            console.error("Erro ao carregar dados sazonais:", error);
+            container.innerHTML = `<p style="color: #f44336; text-align:center;">Não foi possível carregar os dados da temporada agora.</p>`;
+        }
+    }
+
+    // Função principal para iniciar o carregamento sazonal
+    function loadSeasonalData() {
+        // Carrega a temporada atual
+        fetchSeasonalData('now', 'current-season-container');
+        
+        // Carrega os próximos lançamentos
+        fetchSeasonalData('upcoming', 'upcoming-season-container');
+    }
+
+    /* =================================================================
+       6. LÓGICA DO MENU HAMBÚRGUER (MOBILE)
     ================================================================= */
     const navbarMenu = document.getElementById("menu");
     const burgerMenu = document.getElementById("burger");
@@ -104,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     /* =================================================================
-       4. LÓGICA DO TEMA (DARK MODE)
+       7. LÓGICA DO TEMA (DARK MODE)
     ================================================================= */
     const toggleBtn = document.getElementById("theme-toggle");
     const html = document.documentElement;
@@ -150,4 +298,7 @@ document.addEventListener('DOMContentLoaded', () => {
             updateIcon(newTheme);
         });
     }
+
+    // Chamada inicial para carregar as listas sazonais assim que a página carregar
+    loadSeasonalData();
 });
