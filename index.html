@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AniSurprise</title>
+    
     <link rel="shortcut icon" href="src/favicon.png" type="image/x-icon">
+    
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-        <header class="header" id="header">
+    <header class="header" id="header">
         <button id="theme-toggle" class="theme-btn" aria-label="Alternar Tema"></button>
         <nav class="navbar container">
             <a href="#" class="brand">AniSurprise</a>
@@ -17,7 +19,6 @@
                     <li class="menu-item">
                         <a href="https://anisurprisemanga.netlify.app/" class="menu-link" style="color: yellow;">Mangás</a>
                     </li>
-
                     <li class="menu-item"><a href="https://www.instagram.com/daarkozzy?igsh=MWdyc25kdTViOTg2ZA==" class="menu-link">Instagram</a></li>
                     <li class="menu-item"><a href="https://github.com/Daarkozzy" class="menu-link">Github</a></li>
                 </ul>
@@ -35,49 +36,65 @@
     <main>
         <h2 class="molho">Olá, Seja bem vindo ao Animes aleatórios</h2><br>
         <h3>Sem ideia de animes para ver? Clica em animes aleatórios e descubra um anime novo para você assistir.</h3><br>
-<div class="warning-box">
-    <div class="warning-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-7v2h2v-2h-2zm0-8v6h2V7h-2z"/>
-        </svg>
-    </div>
-    <div class="warning-content">
-        <strong>Nota Importante:</strong>
-        <p>O banco de dados é mundial! Se não encontrar legendas em português, tente buscar por fansubs brasileiros.</p>
-    </div>
-</div>
-
         
+        <div class="warning-box">
+            <div class="warning-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-7v2h2v-2h-2zm0-8v6h2V7h-2z"/>
+                </svg>
+            </div>
+            <div class="warning-content">
+                <strong>Nota Importante:</strong>
+                <p>O banco de dados é mundial! Se não encontrar legendas em português, tente buscar por fansubs brasileiros.</p>
+            </div>
+        </div>
 
         
         <div class="genre-container">
-    <p class="genre-title">Escolha um estilo:</p>
-    <div class="genre-grid" id="genre-options">
-        <button class="genre-btn active" data-value="">Todos</button>
-        <button class="genre-btn" data-value="action">Ação</button>
-        <button class="genre-btn" data-value="adventure">Aventura</button>
-        <button class="genre-btn" data-value="romance">Romance</button>
-        <button class="genre-btn" data-value="comedy">Comédia</button>
-        <button class="genre-btn" data-value="drama">Drama</button>
-        <button class="genre-btn" data-value="horror">Terror</button>
-        <button class="genre-btn" data-value="supernatural">Sobrenatural</button>
-        <button class="genre-btn" data-value="fantasy">Fantasia</button>
-        <button class="genre-btn" data-value="sci-fi">Sci-Fi</button>
-    </div>
-</div>
+            <p class="genre-title">Escolha um estilo:</p>
+            <div class="genre-grid" id="genre-options">
+                <button class="genre-btn active" data-value="">Todos</button>
+                <button class="genre-btn" data-value="action">Ação</button>
+                <button class="genre-btn" data-value="adventure">Aventura</button>
+                <button class="genre-btn" data-value="romance">Romance</button>
+                <button class="genre-btn" data-value="comedy">Comédia</button>
+                <button class="genre-btn" data-value="drama">Drama</button>
+                <button class="genre-btn" data-value="horror">Terror</button>
+                <button class="genre-btn" data-value="supernatural">Sobrenatural</button>
+                <button class="genre-btn" data-value="fantasy">Fantasia</button>
+                <button class="genre-btn" data-value="sci-fi">Sci-Fi</button>
+            </div>
+        </div>
 
 
-       <button id="anime-button">Gerar Anime</button>
-<div id="loadingSpinner" style="display:none;">
-    <img src="https://media.tenor.com/ifMy_x2xl0wAAAAi/moom-mooms.gif" alt="Loading..." />
-</div>
-<div id="anime-container" class="anime-container">
-     
-</div>
-    
+        <button id="anime-button">Gerar Anime</button>
+        <div id="loadingSpinner" style="display:none;">
+            <img src="https://media.tenor.com/ifMy_x2xl0wAAAAi/moom-mooms.gif" alt="Loading..." />
+        </div>
+        <div id="anime-container" class="anime-container">
+             
+        </div>
         
-    </main>
-<div class="gif">
+        <section id="seasonal-anime-section" style="margin-top: 50px; padding: 20px;">
+            
+            <h2 style="text-align: center; color: var(--text-color); margin-bottom: 30px;">
+                🔥 Destaques da Temporada Atual 🔥
+            </h2>
+            <div id="current-season-container" class="seasonal-grid">
+                <p style="text-align: center; color: var(--text-color);">Carregando Top 10...</p>
+            </div>
+
+            <h2 style="text-align: center; color: var(--text-color); margin-top: 60px; margin-bottom: 30px;">
+                📅 Próximos Lançamentos (Upcoming) 📅
+            </h2>
+            <div id="upcoming-season-container" class="seasonal-grid">
+                <p style="text-align: center; color: var(--text-color);">Carregando Próximos Animes...</p>
+            </div>
+
+        </section>
+        </main>
+    
+    <div class="gif">
         <img src="https://media.tenor.com/yIac_2FgDxEAAAAi/dance-%D0%B0%D0%BD%D0%B8%D0%BC%D0%B5.gif" alt="anime-gif" />
     </div>
 
