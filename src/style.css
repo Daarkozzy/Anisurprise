@@ -13,6 +13,7 @@
   --molho-color: #f1683a;
   --btn-bg: #f1683a;
   --btn-text: #ffffff;
+  --border-color: rgba(136, 136, 136, 0.2);
 }
 
 [data-theme="dark"] {
@@ -24,6 +25,7 @@
   --molho-color: #ff8c69;
   --btn-bg: #f1683a;
   --btn-text: #ffffff;
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
 /* =========================================
@@ -138,7 +140,7 @@ h3 {
   top: 50%;
   transform: translateY(-50%);
   z-index: 101;
-  right: 4.5rem;
+  right: 4.5rem; 
   color: var(--header-text);
   transition: transform 0.2s, background 0.2s;
 }
@@ -239,8 +241,8 @@ h3 {
     display: flex;
     align-items: center;
     gap: 15px;
-    background: rgba(241, 104, 58, 0.1);
-    border: 1px solid rgba(241, 104, 58, 0.3);
+    background: rgba(241, 104, 58, 0.1); 
+    border: 1px solid rgba(241, 104, 58, 0.3); 
     border-left: 4px solid #f1683a; 
     border-radius: 12px;
     padding: 15px 20px;
@@ -261,7 +263,7 @@ h3 {
     width: 32px;
     height: 32px;
     fill: #f1683a; 
-    animation: pulse 2s infinite;
+    animation: pulse 2s infinite; 
 }
 
 .warning-content {
@@ -270,14 +272,14 @@ h3 {
 }
 
 .warning-content strong {
-    color: #f1683a;
+    color: #f1683a; 
     font-size: 0.95rem;
     margin-bottom: 2px;
     font-family: "Poppins", sans-serif;
 }
 
 .warning-content p {
-    color: var(--text-color);
+    color: var(--text-color); 
     font-size: 0.85rem;
     margin: 0;
     opacity: 0.8;
@@ -400,19 +402,11 @@ h3 {
 /* Container do Anime */
 #anime-container {
   width: 90%;
-  max-width: 600px;
+  max-width: 800px; 
   margin: 20px auto 0 auto;
   min-height: 200px; 
 }
 
-
-#anime-container img {
-    max-width: 100%;
-    height: auto;
-    max-height: 400px; 
-    object-fit: contain;
-    border-radius: 10px;
-}
 
 .gif {
   position: fixed;     
@@ -494,7 +488,7 @@ footer {
     column-gap: 1.25rem;
   }
 
-  .burger { display: none; 
+  .burger { display: none; }
   .theme-btn { right: 2rem; }
 }
 
@@ -504,5 +498,311 @@ footer {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     height: 4.25rem;
   }
-  main { padding-top: 12.5rem; }
+  main { padding-top: 10rem; } 
+}
+
+/* =========================================
+   9. ESTILOS DE FUNCIONALIDADES (PROFISSIONAL)
+   ========================================= */
+
+/* Estilo Base do Card */
+.anime-card {
+    background: var(--card-bg);
+    color: var(--text-color);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.anime-card .btn-link {
+    display: block;
+    background: var(--btn-bg);
+    color: var(--btn-text);
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.anime-card .btn-link:hover {
+    opacity: 0.9;
+    transform: translateY(-1px);
+}
+
+
+/* -----------------------------------------
+   Card Aleatório (Layout de Duas Colunas)
+   ----------------------------------------- */
+.professional-card {
+    display: flex;
+    flex-direction: row; 
+    text-align: left;
+    padding: 0;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 15px; 
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.card-image-wrapper {
+    flex-shrink: 0;
+    width: 40%;
+    max-width: 250px;
+}
+
+.card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px 0 0 15px; 
+    transition: transform 0.3s ease;
+}
+
+.professional-card:hover .card-image {
+    transform: scale(1.05); 
+}
+
+.card-content-wrapper {
+    flex-grow: 1;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.professional-card h2 {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.8rem;
+    margin-bottom: 5px;
+    color: var(--molho-color); 
+}
+
+.meta {
+    margin-bottom: 10px;
+}
+
+.meta span {
+    font-size: 0.9rem;
+    color: var(--text-color);
+    font-weight: 600;
+    opacity: 0.8;
+}
+
+.genres {
+    margin: 15px 0;
+    padding: 10px 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.85rem;
+}
+
+.synopsis-box {
+    margin-bottom: 15px;
+}
+
+.synopsis-box h3 {
+    font-family: "Baskervville SC", serif;
+    font-size: 1.1rem;
+    color: var(--molho-color);
+    margin-bottom: 5px;
+}
+
+.synopsis-text {
+    max-height: 150px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    padding-right: 10px; 
+    line-height: 1.6;
+}
+
+.card-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-top: 15px;
+}
+.card-actions .btn-link {
+    flex-grow: 1;
+}
+
+.trailer-link {
+    flex-shrink: 0;
+    color: var(--molho-color); 
+    text-align: center;
+    padding: 10px 15px;
+    border: 2px solid var(--molho-color);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.trailer-link:hover {
+    background: var(--molho-color);
+    color: var(--btn-text);
+}
+
+
+/* Responsive para o Card Aleatório (Mobile) */
+@media (max-width: 768px) {
+    .professional-card {
+        flex-direction: column; 
+        border-radius: 15px;
+        max-width: 100%;
+    }
+    .card-image-wrapper {
+        width: 100%;
+        max-width: none;
+        height: 350px;
+    }
+    .card-image {
+        border-radius: 15px 15px 0 0; 
+    }
+    .card-content-wrapper {
+        padding: 20px;
+    }
+    .card-actions {
+        flex-direction: column;
+    }
+    .trailer-link {
+        width: 100%; 
+    }
+}
+
+
+/* -----------------------------------------
+   Estilos Sazonais (Top 10 - Carrossel Horizontal GRANDE)
+   ----------------------------------------- */
+
+.seasonal-grid {
+    /* ESTILO CARROSSEL HORIZONTAL */
+    display: flex;
+    flex-wrap: nowrap; 
+    overflow-x: auto; 
+    gap: 15px; 
+    padding: 10px 10px 20px 10px; 
+    max-width: 100%; 
+    margin: 20px auto;
+    
+    /* Estilizando a barra de rolagem para ser discreta */
+    scrollbar-width: thin;
+    scrollbar-color: var(--molho-color) transparent;
+}
+
+.seasonal-grid::-webkit-scrollbar {
+    height: 8px;
+}
+
+.seasonal-grid::-webkit-scrollbar-thumb {
+    background-color: var(--molho-color);
+    border-radius: 10px;
+}
+
+.seasonal-grid::-webkit-scrollbar-track {
+    background: var(--card-bg);
+}
+
+.seasonal-card {
+    /* TAMANHO E LAYOUT VERTICAL MAIOR (ESTILO NETFLIX) */
+    flex-shrink: 0; 
+    width: 200px; /* Largura ideal para tiles grandes */
+    max-width: 200px; 
+    height: 350px; /* Altura fixa para o card */
+    
+    background: var(--card-bg); 
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+    
+    /* Layout interno: Imagem em cima, conteúdo em baixo */
+    display: flex;
+    flex-direction: column;
+    
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.seasonal-card:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    box-shadow: 0 10px 20px rgba(241, 104, 58, 0.4); 
+    z-index: 10; /* Garante que ele fique sobreposto ao vizinho */
+}
+
+.seasonal-img {
+    /* A imagem domina a parte superior do card */
+    width: 100%;
+    height: 70%; /* Imagem ocupa 70% da altura do card */
+    object-fit: cover;
+}
+
+.seasonal-content {
+    padding: 10px;
+    flex-grow: 1; /* Ocupa o restante da altura (30%) */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.seasonal-info-top {
+    /* Título e Badge empilhados */
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-start;
+    margin-bottom: 5px;
+}
+
+.seasonal-title {
+    /* Limita o título a 2 linhas */
+    font-size: 0.95rem; 
+    line-height: 1.2;
+    margin-bottom: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 700;
+}
+
+.seasonal-info-bottom {
+    /* Foca apenas nas informações essenciais (Episódios e Score) */
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    margin-top: auto;
+}
+
+.seasonal-episodes {
+    font-size: 0.75rem;
+    color: var(--text-color);
+    opacity: 0.7;
+    margin: 0;
+}
+
+/* Ocultamos o link 'Ver Detalhes' para um visual mais limpo de streaming */
+.seasonal-link {
+    display: none; 
+}
+
+.seasonal-score-badge, .seasonal-release-badge {
+    background: var(--molho-color);
+    color: white;
+    padding: 3px 8px;
+    border-radius: 5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    box-shadow: 0 2px 5px rgba(241, 104, 58, 0.4);
+    align-self: flex-end; 
+}
+
+@media (max-width: 768px) {
+    /* Ajuste para mobile */
+    .seasonal-card {
+        width: 180px; 
+        max-width: 180px;
+        height: 320px;
+    }
 }
