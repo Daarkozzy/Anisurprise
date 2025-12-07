@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>AniSurprise</title>
-    
-    <link rel="shortcut icon" href="src/favicon.png" type="image/x-icon">
-    
+
+    <!-- Ícone (ajustado para o arquivo que está no repositório) -->
+    <link rel="shortcut icon" href="src/favicon.jpg" type="image/x-icon">
+
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
@@ -19,12 +20,11 @@
                     <li class="menu-item">
                         <a href="https://anisurprisemanga.netlify.app/" class="menu-link" style="color: yellow;">Mangás</a>
                     </li>
-                    <li class="menu-item"><a href="https://www.instagram.com/daarkozzy?igsh=MWdyc25kdTViOTg2ZA==" class="menu-link">Instagram</a></li>
+                    <li class="menu-item"><a href="https://www.instagram.com/daarkozzy" class="menu-link">Instagram</a></li>
                     <li class="menu-item"><a href="https://github.com/Daarkozzy" class="menu-link">Github</a></li>
                 </ul>
             </div>
-            <div class="burger" id="burger">
-                <span class="burger-line"></span>
+            <div class="burger" id="burger" aria-hidden="true">
                 <span class="burger-line"></span>
                 <span class="burger-line"></span>
                 <span class="burger-line"></span>
@@ -32,24 +32,22 @@
         </nav>
     </header>
 
-
     <main>
-        <h2 class="molho">Olá, Seja bem vindo ao Animes aleatórios</h2><br>
-        <h3>Sem ideia de animes para ver? Clica em animes aleatórios e descubra um anime novo para você assistir.</h3><br>
-        
+        <h2 class="molho">Olá — bem vindo ao AniSurprise</h2>
+        <p class="lead">Sem ideia de animes para ver? Clique em "Gerar Anime" e descubra algo novo.</p>
+
         <div class="warning-box">
-            <div class="warning-icon">
+            <div class="warning-icon" aria-hidden="true">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2s10 4.477 10 10-4.477 10-10 10zm-1-7v2h2v-2h-2zm0-8v6h2V7h-2z"/>
                 </svg>
             </div>
             <div class="warning-content">
                 <strong>Nota Importante:</strong>
-                <p>O banco de dados é mundial! Se não encontrar legendas em português, tente buscar por fansubs brasileiros.</p>
+                <p>O banco de dados é mundial. Se não encontrar legendas em português, tente procurar por fansubs brasileiros.</p>
             </div>
         </div>
 
-        
         <div class="genre-container">
             <p class="genre-title">Escolha um estilo:</p>
             <div class="genre-grid" id="genre-options">
@@ -62,51 +60,43 @@
                 <button class="genre-btn" data-value="horror">Terror</button>
                 <button class="genre-btn" data-value="supernatural">Sobrenatural</button>
                 <button class="genre-btn" data-value="fantasy">Fantasia</button>
-                <button class="genre-btn" data-value="sci-fi">Sci-Fi</button>
+                <button class="genre-btn" data-value="sci-fi">Sci‑Fi</button>
             </div>
         </div>
 
+        <div class="controls">
+            <button id="anime-button" class="primary-btn">Gerar Anime</button>
+            <div id="loadingSpinner" class="spinner" aria-hidden="true"></div>
+        </div>
 
-        <button id="anime-button">Gerar Anime</button>
-        <div id="loadingSpinner" style="display:none;">
-            <img src="https://media.tenor.com/ifMy_x2xl0wAAAAi/moom-mooms.gif" alt="Loading..." />
-        </div>
-        <div id="anime-container" class="anime-container">
-             
-        </div>
-        
-        <section id="seasonal-anime-section" style="margin-top: 50px; padding: 20px;">
-            
-            <h2 style="text-align: center; color: var(--text-color); margin-bottom: 30px;">
-                🔥 Destaques da Temporada Atual 🔥
-            </h2>
+        <div id="anime-container" class="anime-container" aria-live="polite" role="region"></div>
+
+        <section id="seasonal-anime-section" class="seasonal-section">
+            <h2>🔥 Destaques da Temporada Atual</h2>
             <div id="current-season-container" class="seasonal-grid">
-                <p style="text-align: center; color: var(--text-color);">Carregando Top 10...</p>
+                <p>Carregando Top 10...</p>
             </div>
 
-            <h2 style="text-align: center; color: var(--text-color); margin-top: 60px; margin-bottom: 30px;">
-                📅 Próximos Lançamentos (Upcoming) 📅
-            </h2>
+            <h2>📅 Próximos Lançamentos (Upcoming)</h2>
             <div id="upcoming-season-container" class="seasonal-grid">
-                <p style="text-align: center; color: var(--text-color);">Carregando Próximos Animes...</p>
+                <p>Carregando Próximos Animes...</p>
             </div>
-
         </section>
-        </main>
-    
-    <div class="gif">
-        <img src="https://media.tenor.com/yIac_2FgDxEAAAAi/dance-%D0%B0%D0%BD%D0%B8%D0%BC%D0%B5.gif" alt="anime-gif" />
+    </main>
+
+    <div class="gif" aria-hidden="true">
+        <img src="https://media.tenor.com/yIac_2FgDxEAAAAi/dance-%D0%B0%D0%BD%D0%B8%D0%BC%D0%B5.gif" alt="">
     </div>
 
     <footer>
         <div class="footer-content">
-            <a href="https://github.com/Daarkozzy" target="_blank">
-                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="Logo do GitHub">
+            <a href="https://github.com/Daarkozzy" target="_blank" rel="noopener noreferrer">
+                <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub">
             </a>
-            <a href="https://www.instagram.com/daarkozzy?igsh=MWdyc25kdTViOTg2ZA==" target="_blank">
-                <img src="https://cdn-icons-png.flaticon.com/512/87/87390.png" alt="Logo do Instagram">
+            <a href="https://www.instagram.com/daarkozzy" target="_blank" rel="noopener noreferrer">
+                <img src="https://cdn-icons-png.flaticon.com/512/87/87390.png" alt="Instagram">
             </a>
-            <p>&copy; 2023 AnimesLand. Todos os direitos reservados.</p>
+            <p>&copy; 2023 AniSurprise. Todos os direitos reservados.</p>
         </div>
     </footer>
 
