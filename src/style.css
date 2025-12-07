@@ -1,808 +1,144 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Baskervville+SC&display=swap');
 
-/* =========================================
-   1. VARIÁVEIS E TEMA (DARK/LIGHT)
-   ========================================= */
-:root {
-  --bg-color: #ffffff;
-  --text-color: #333333;
-  --header-bg: #f1683a;
-  --header-text: #ffffff;
-  --card-bg: #f9f9f9;
-  --molho-color: #f1683a;
-  --btn-bg: #f1683a;
-  --btn-text: #ffffff;
-  --border-color: rgba(136, 136, 136, 0.2);
+:root{
+  --bg-color: #0f1720;
+  --card-bg: #0b1220;
+  --text-color: #e6eef8;
+  --muted: #a6b0c3;
+  --accent-1: #ff7a59;
+  --accent-2: #ffb06b;
+  --glass: rgba(255,255,255,0.04);
+  --border: rgba(255,255,255,0.06);
+  --glass-strong: rgba(255,255,255,0.06);
+  --shadow: 0 10px 30px rgba(2,6,23,0.6);
+  --radius: 12px;
+  --max-width: 1100px;
 }
 
-[data-theme="dark"] {
-  --bg-color: #1a1a1a;
-  --text-color: #f0f0f0;
-  --header-bg: #2d2d2d;
-  --header-text: #f1683a;
-  --card-bg: #333333;
-  --molho-color: #ff8c69;
-  --btn-bg: #f1683a;
-  --btn-text: #ffffff;
-  --border-color: rgba(255, 255, 255, 0.1);
+[data-theme="light"]{
+  --bg-color: #f7fafc;
+  --card-bg: #ffffff;
+  --text-color: #111827;
+  --muted: #475569;
+  --accent-1: #f1683a;
+  --accent-2: #ffb06b;
+  --glass: rgba(0,0,0,0.03);
+  --border: rgba(0,0,0,0.06);
+  --glass-strong: rgba(0,0,0,0.04);
+  --shadow: 0 8px 24px rgba(15,23,42,0.08);
 }
 
-/* =========================================
-   2. RESET E ESTRUTURA BÁSICA
-   ========================================= */
-*,
-*::before,
-*::after {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  list-style: none;
-  text-decoration: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-html {
-  font-size: 16px; 
-}
-
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  min-height: 100vh;
-  overflow-x: hidden;
-  background-color: var(--bg-color);
+/* Reset / Base */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: "Poppins", Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg-color), rgba(0,0,0,0.03));
   color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-/* =========================================
-   3. CONTEÚDO PRINCIPAL (MAIN)
-   ========================================= */
-main {
-  text-align: center;
-  padding: 2rem;
-  padding-top: 6.25rem; 
-  width: 100%;
-  flex: 1;
-  padding-bottom: 5rem; 
-}
-
-/* Títulos */
-.molho {
-  font-family: "Baskervville SC", serif;
-  font-size: 2rem; 
-  color: var(--molho-color);
-  text-align: center;
-}
-
-h3 {
-  font-family: "Baskervville SC", serif;
-  font-weight: normal;
-  font-size: 0.9375rem; 
-}
-
-/* =========================================
-   4. CABEÇALHO E NAVEGAÇÃO
-   ========================================= */
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  width: 100%;
-  height: 4rem; 
-  margin: 0 auto;
-  background: var(--header-bg);
-  color: var(--header-text);
-  box-shadow: 0.0625rem 0.0625rem 0.625rem black; 
-}
-
-.navbar {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-items: center;
-  height: auto;
-  padding-top: 0.5rem;
-}
-
-.brand {
-  justify-self: start;
-  font-family: "Poppins", sans-serif;
-  font-size: 1.9rem;
-  font-weight: 700;
-  line-height: 1.5;
-  letter-spacing: -0.0625rem;
-  text-transform: uppercase;
-  color: white;
-  padding-left: 1rem;
-}
-
-/* Botão do Tema (Sol/Lua) */
-.theme-btn {
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 101;
-  right: 4.5rem; 
-  color: var(--header-text);
-  transition: transform 0.2s, background 0.2s;
-}
-
-.theme-btn:hover {
-  transform: translateY(-50%) scale(1.1);
-  background: rgba(255,255,255,0.1);
-}
-
-.theme-btn svg {
-  width: 1.5rem;
-  height: 1.5rem;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2;
-  pointer-events: none;
-}
-
-/* Menu Mobile */
-.menu {
-  position: fixed;
-  top: -100%;
-  left: 0;
-  width: 100%;
-  height: auto;
-  overflow: hidden;
-  padding: 3rem 0 2rem 0;
-  background: #f1683a;
-  box-shadow: 0.0625rem 0.0625rem black;
-  transition: all 0.45s ease-in-out;
-  font-size: 2.1rem;
-  font-family: "Poppins", sans-serif;
-}
-
-.menu.is-active {
-  top: 0;
-  width: 100%;
-  height: inherit;
-}
-
-.menu-inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  row-gap: 1.5rem;
-}
-
-.menu-link {
-  font-family: inherit;
-  font-size: 1.2rem;
-  font-weight: bold;
-  text-transform: uppercase;
-  color: white;
-  transition: all 0.35s ease-in-out;
-}
-
-.menu-link:hover {
-  color: #ffcccc;
-}
-
-/* Burger Icon */
-.burger {
-  position: relative;
-  justify-self: end;
-  cursor: pointer;
-  z-index: 10;
-  width: 1.6rem;
-  height: 1.15rem;
-  background: none;
-  border: none;
-  margin-right: 1rem;
-}
-
-.burger-line {
-  position: absolute;
-  display: block;
-  right: 0;
-  width: 100%;
-  height: 0.13125rem; 
-  border-radius: 1rem;
-  background-color: white;
-  transition: 0.25s ease-in-out;
-}
-
-.burger-line:nth-child(1) { top: 0; }
-.burger-line:nth-child(2) { top: 0.5rem; width: 70%; }
-.burger-line:nth-child(3) { top: 1rem; }
-
-.burger.is-active .burger-line:nth-child(1) { top: 0.5rem; transform: rotate(135deg); }
-.burger.is-active .burger-line:nth-child(2) { opacity: 0; visibility: hidden; }
-.burger.is-active .burger-line:nth-child(3) { top: 0.5rem; transform: rotate(-135deg); }
-
-/* =========================================
-   ESTILO DO AVISO (WARNING BOX)
-   ========================================= */
-.warning-box {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    background: rgba(241, 104, 58, 0.1); 
-    border: 1px solid rgba(241, 104, 58, 0.3); 
-    border-left: 4px solid #f1683a; 
-    border-radius: 12px;
-    padding: 15px 20px;
-    margin: 20px auto; 
-    max-width: 600px; 
-    width: 90%;
-    text-align: left;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(5px); 
-}
-
-.warning-box:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(241, 104, 58, 0.15);
-}
-
-.warning-icon svg {
-    width: 32px;
-    height: 32px;
-    fill: #f1683a; 
-    animation: pulse 2s infinite; 
-}
-
-.warning-content {
-    display: flex;
-    flex-direction: column;
-}
-
-.warning-content strong {
-    color: #f1683a; 
-    font-size: 0.95rem;
-    margin-bottom: 2px;
-    font-family: "Poppins", sans-serif;
-}
-
-.warning-content p {
-    color: var(--text-color); 
-    font-size: 0.85rem;
-    margin: 0;
-    opacity: 0.8;
-    line-height: 1.4;
-}
-
-/* Animação do ícone pulsando */
-@keyframes pulse {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.1); opacity: 0.8; }
-    100% { transform: scale(1); opacity: 1; }
-}
-
-/* Ajuste para celular */
-@media only screen and (max-width: 480px) {
-    .warning-box {
-        padding: 12px;
-    }
-    .warning-icon svg {
-        width: 24px;
-        height: 24px;
-    }
-    .warning-content p {
-        font-size: 0.75rem;
-    }
-}
-
-
-/* =========================================
-   5. BOTÕES DE GÊNERO (TAGS/CHIPS)
-   ========================================= */
-.genre-container {
-    margin: 2rem auto;
-    width: 90%;
-    max-width: 600px;
-    text-align: center;
-}
-
-.genre-title {
-    font-family: "Poppins", sans-serif;
-    margin-bottom: 1rem;
-    font-weight: 600;
-    color: var(--text-color);
-}
-
-.genre-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
-}
-
-.genre-btn {
-    background: transparent;
-    border: 1px solid var(--text-color);
-    color: var(--text-color);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-family: "Poppins", sans-serif;
-    font-size: 0.9rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0.7;
-}
-
-.genre-btn:hover {
-    transform: translateY(-2px);
-    opacity: 1;
-    border-color: var(--header-bg);
-    color: var(--header-bg);
-}
-
-.genre-btn.active {
-    background-color: var(--header-bg);
-    color: white;
-    border-color: var(--header-bg);
-    opacity: 1;
-    font-weight: 600;
-    box-shadow: 0 4px 10px rgba(241, 104, 58, 0.3);
-}
-
-/* =========================================
-   6. BOTÃO GERAR E RESULTADOS
-   ========================================= */
-#anime-button {
-  display: inline-block;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: #fff;
-  font-weight: 500;
-  background: #f1683a;
-  border-radius: 5rem;
-  transition: 0.3s ease-in-out;
-  border: 0.0625rem solid #c2c2c2;
-  padding: 0.625rem 1.875rem;
-  height: 3.125rem;
-  cursor: pointer;
-  margin-top: 1rem;
-}
-
-#anime-button:hover {
-  background: white;
-  color: #f1683a;
-  transform: scale(1.05);
-}
-
-
-#loadingSpinner {
-    display: none; 
-    margin: 20px auto; 
-    text-align: center;
-    position: static; 
-}
-
-#loadingSpinner img {
-    width: 80px; 
-    height: auto;
-}
-
-/* Container do Anime */
-#anime-container {
-  width: 90%;
-  max-width: 800px; 
-  margin: 20px auto 0 auto;
-  min-height: 200px; 
-}
-
-
-.gif {
-  position: fixed;     
-  bottom: 0;            
-  right: 1rem;         
-  z-index: 999;         
-  pointer-events: none; 
-  width: auto;          
-}
-
-.gif img {
-    width: 120px;       
-    height: auto;
-    display: block;     
-}
-
-
-@media only screen and (max-width: 480px) {
-    .gif img {
-        width: 80px; 
-        opacity: 0.8; 
-    }
-}
-
-
-
-/* =========================================
-   7. RODAPÉ (FOOTER)
-   ========================================= */
-footer {
-  text-align: center;
-  padding: 1rem; 
-  background-color: var(--bg-color);
-  width: 100%;
-  color: var(--text-color);
-  font-size: 0.8rem;
-  position: relative;
-  margin-top: auto;
-}
-
-.footer-content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem; 
-}
-
-.footer-content img {
-  width: 20px; 
-  height: auto; 
-}
-
-/* =========================================
-   8. MEDIA QUERIES (ADAPTAÇÃO)
-   ========================================= */
-
-@media only screen and (max-width: 480px) {
-   h3 { font-size: 0.8rem; }
-   .molho { font-size: 1.2rem; }
-   #anime-button { padding: 0.5rem 1.5rem; height: 2.8rem; }
-}
-
-@media only screen and (min-width: 48rem) { /* Tablet/PC */
-  .header { height: 6.25rem; }
-  
-  .menu {
-    position: relative;
-    top: 0; left: 0;
-    width: auto; height: auto;
-    padding: 0;
-    background: none;
-    box-shadow: none;
-    display: flex;
-    justify-self: end;
-  }
-
-  .menu-inner {
-    flex-direction: row;
-    column-gap: 1.25rem;
-  }
-
-  .burger { display: none; }
-  .theme-btn { right: 2rem; }
-}
-
-@media only screen and (min-width: 62rem) { /* Telas Grandes */
-  .header { height: 5rem; }
-  .navbar {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    height: 4.25rem;
-  }
-  main { padding-top: 10rem; } 
-}
-
-/* =========================================
-   9. ESTILOS DE FUNCIONALIDADES (PROFISSIONAL)
-   ========================================= */
-
-/* Estilo Base do Card */
-.anime-card {
-    background: var(--card-bg);
-    color: var(--text-color);
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-.anime-card .btn-link {
-    display: block;
-    background: var(--btn-bg);
-    color: var(--btn-text);
-    text-align: center;
-    padding: 12px;
-    border-radius: 8px;
-    font-weight: bold;
-    text-decoration: none;
-    transition: background 0.3s, transform 0.3s;
-}
-
-.anime-card .btn-link:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-}
-
-
-/* -----------------------------------------
-   Card Aleatório (Layout de Duas Colunas)
-   ----------------------------------------- */
-.professional-card {
-    display: flex;
-    flex-direction: row; 
-    text-align: left;
-    padding: 0;
-    overflow: hidden;
-    max-width: 800px;
-    margin: 20px auto;
-    border-radius: 15px; 
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-}
-
-.card-image-wrapper {
-    flex-shrink: 0;
-    width: 40%;
-    max-width: 250px;
-}
-
-.card-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    border-radius: 15px 0 0 15px; 
-    transition: transform 0.3s ease;
-}
-
-.professional-card:hover .card-image {
-    transform: scale(1.05); 
-}
-
-.card-content-wrapper {
-    flex-grow: 1;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.professional-card h2 {
-    font-family: "Poppins", sans-serif;
-    font-size: 1.8rem;
-    margin-bottom: 5px;
-    color: var(--molho-color); 
-}
-
-.meta {
-    margin-bottom: 10px;
-}
-
-.meta span {
-    font-size: 0.9rem;
-    color: var(--text-color);
-    font-weight: 600;
-    opacity: 0.8;
-}
-
-.genres {
-    margin: 15px 0;
-    padding: 10px 0;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
-    font-size: 0.85rem;
-}
-
-.synopsis-box {
-    margin-bottom: 15px;
-}
-
-.synopsis-box h3 {
-    font-family: "Baskervville SC", serif;
-    font-size: 1.1rem;
-    color: var(--molho-color);
-    margin-bottom: 5px;
-}
-
-.synopsis-text {
-    max-height: 150px;
-    overflow-y: auto;
-    font-size: 0.9rem;
-    padding-right: 10px; 
-    line-height: 1.6;
-}
-
-.card-actions {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-top: 15px;
-}
-.card-actions .btn-link {
-    flex-grow: 1;
-}
-
-.trailer-link {
-    flex-shrink: 0;
-    color: var(--molho-color); 
-    text-align: center;
-    padding: 10px 15px;
-    border: 2px solid var(--molho-color);
-    border-radius: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    transition: all 0.3s ease;
-}
-
-.trailer-link:hover {
-    background: var(--molho-color);
-    color: var(--btn-text);
-}
-
-
-/* Responsive para o Card Aleatório (Mobile) */
-@media (max-width: 768px) {
-    .professional-card {
-        flex-direction: column; 
-        border-radius: 15px;
-        max-width: 100%;
-    }
-    .card-image-wrapper {
-        width: 100%;
-        max-width: none;
-        height: 350px;
-    }
-    .card-image {
-        border-radius: 15px 15px 0 0; 
-    }
-    .card-content-wrapper {
-        padding: 20px;
-    }
-    .card-actions {
-        flex-direction: column;
-    }
-    .trailer-link {
-        width: 100%; 
-    }
-}
-
-
-/* -----------------------------------------
-   Estilos Sazonais (Top 10 - Carrossel Horizontal GRANDE)
-   ----------------------------------------- */
-
-.seasonal-grid {
-    /* ESTILO CARROSSEL HORIZONTAL */
-    display: flex;
-    flex-wrap: nowrap; 
-    overflow-x: auto; 
-    gap: 15px; 
-    padding: 10px 10px 20px 10px; 
-    max-width: 100%; 
-    margin: 20px auto;
-    
-    /* Estilizando a barra de rolagem para ser discreta */
-    scrollbar-width: thin;
-    scrollbar-color: var(--molho-color) transparent;
-}
-
-.seasonal-grid::-webkit-scrollbar {
-    height: 8px;
-}
-
-.seasonal-grid::-webkit-scrollbar-thumb {
-    background-color: var(--molho-color);
-    border-radius: 10px;
-}
-
-.seasonal-grid::-webkit-scrollbar-track {
-    background: var(--card-bg);
-}
-
-.seasonal-card {
-    /* TAMANHO E LAYOUT VERTICAL MAIOR (ESTILO NETFLIX) */
-    flex-shrink: 0; 
-    width: 200px; /* Largura ideal para tiles grandes */
-    max-width: 200px; 
-    height: 350px; /* Altura fixa para o card */
-    
-    background: var(--card-bg); 
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
-    
-    /* Layout interno: Imagem em cima, conteúdo em baixo */
-    display: flex;
-    flex-direction: column;
-    
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.seasonal-card:hover {
-    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
-    box-shadow: 0 10px 20px rgba(241, 104, 58, 0.4); 
-    z-index: 10; /* Garante que ele fique sobreposto ao vizinho */
-}
-
-.seasonal-img {
-    /* A imagem domina a parte superior do card */
-    width: 100%;
-    height: 70%; /* Imagem ocupa 70% da altura do card */
-    object-fit: cover;
-}
-
-.seasonal-content {
-    padding: 10px;
-    flex-grow: 1; /* Ocupa o restante da altura (30%) */
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-.seasonal-info-top {
-    /* Título e Badge empilhados */
-    display: flex;
-    flex-direction: column; 
-    align-items: flex-start;
-    margin-bottom: 5px;
-}
-
-.seasonal-title {
-    /* Limita o título a 2 linhas */
-    font-size: 0.95rem; 
-    line-height: 1.2;
-    margin-bottom: 5px;
-    display: -webkit-box;
-    -webkit-line-clamp: 2; 
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-weight: 700;
-}
-
-.seasonal-info-bottom {
-    /* Foca apenas nas informações essenciais (Episódios e Score) */
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    margin-top: auto;
-}
-
-.seasonal-episodes {
-    font-size: 0.75rem;
-    color: var(--text-color);
-    opacity: 0.7;
-    margin: 0;
-}
-
-/* Ocultamos o link 'Ver Detalhes' para um visual mais limpo de streaming */
-.seasonal-link {
-    display: none; 
-}
-
-.seasonal-score-badge, .seasonal-release-badge {
-    background: var(--molho-color);
-    color: white;
-    padding: 3px 8px;
-    border-radius: 5px;
-    font-size: 0.75rem;
-    font-weight: 700;
-    box-shadow: 0 2px 5px rgba(241, 104, 58, 0.4);
-    align-self: flex-end; 
-}
-
-@media (max-width: 768px) {
-    /* Ajuste para mobile */
-    .seasonal-card {
-        width: 180px; 
-        max-width: 180px;
-        height: 320px;
-    }
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* Header */
+.header{
+  position:fixed;left:0;right:0;top:0;
+  height:72px;
+  background: linear-gradient(90deg,var(--accent-1),var(--accent-2));
+  display:flex;align-items:center;z-index:60;
+  box-shadow: var(--shadow);
+}
+.navbar{max-width:var(--max-width);width:100%;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between}
+.brand{color:#fff;font-weight:700;font-size:1.4rem;text-transform:uppercase;letter-spacing:0.6px}
+.theme-btn{
+  width:44px;height:44px;border-radius:999px;border:0;background:rgba(255,255,255,0.12);display:flex;align-items:center;justify-content:center;color:#fff;cursor:pointer;backdrop-filter: blur(4px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+.theme-btn svg{width:20px;height:20px}
+
+/* Menu mobile */
+.menu{display:none}
+.burger{display:none}
+
+/* Main */
+main{max-width:var(--max-width);width:100%;padding:110px 20px 60px 20px;text-align:center}
+
+/* Titles */
+.molho{font-family:"Baskervville SC", serif;color:var(--accent-1);font-size:2rem;margin-bottom:6px}
+.lead{color:var(--muted);margin-bottom:18px}
+
+/* Warning */
+.warning-box{max-width:860px;margin:18px auto;display:flex;gap:14px;align-items:flex-start;background:linear-gradient(180deg, rgba(255,122,89,0.06), rgba(255,176,107,0.03));padding:14px;border-radius:12px;border:1px solid var(--border)}
+.warning-icon svg{width:30px;height:30px;fill:var(--accent-1)}
+.warning-content strong{color:var(--accent-1);display:block;margin-bottom:4px;font-weight:600}
+.warning-content p{color:var(--muted);font-size:0.95rem;line-height:1.4}
+
+/* Genres */
+.genre-container{margin:24px auto;max-width:880px}
+.genre-grid{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.genre-btn{padding:8px 14px;border-radius:999px;border:1px solid var(--border);background:transparent;color:var(--text-color);cursor:pointer;opacity:0.9;transition:all .18s}
+.genre-btn:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,0.25)}
+.genre-btn.active{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;border:0;box-shadow:var(--shadow);font-weight:600}
+
+/* Controls */
+.controls{display:flex;gap:12px;justify-content:center;align-items:center;margin-top:8px}
+.primary-btn{background:linear-gradient(90deg,var(--accent-1),var(--accent-2));border:0;padding:12px 20px;border-radius:999px;color:#fff;font-weight:700;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s}
+.primary-btn:hover{transform:translateY(-3px)}
+
+/* Spinner (CSS) */
+.spinner{width:36px;height:36px;border-radius:50%;border:4px solid rgba(255,255,255,0.12);border-top-color:var(--accent-2);animation:spin 1s linear infinite;display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Anime container and card */
+.anime-container{max-width:900px;width:100%;margin:22px auto;min-height:120px;padding:0 10px}
+.anime-card{background:var(--card-bg);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);display:flex;gap:0;align-items:stretch;border:1px solid var(--border)}
+.card-image-wrapper{flex:0 0 38%;max-width:320px;height:100%}
+.card-image{width:100%;height:100%;object-fit:cover}
+.card-content-wrapper{padding:20px;display:flex;flex-direction:column;justify-content:space-between;flex:1}
+.card-header h2{font-size:1.5rem;margin:0;color:var(--accent-1)}
+.meta{color:var(--muted);font-weight:600;margin:6px 0}
+.genres{font-size:0.95rem;color:var(--muted);padding:10px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.synopsis-text{max-height:160px;overflow:auto;color:var(--text-color);line-height:1.55;padding-right:8px}
+
+/* Card actions */
+.card-actions{display:flex;gap:12px;align-items:center;margin-top:12px}
+.btn-link{padding:10px 12px;border-radius:8px;background:linear-gradient(90deg,var(--accent-1),var(--accent-2));color:#fff;text-decoration:none;font-weight:700;display:inline-block}
+.trailer-link{padding:8px 12px;border-radius:8px;border:2px solid var(--accent-1);background:transparent;color:var(--accent-1);font-weight:700;text-decoration:none}
+
+/* Seasonal carousel */
+.seasonal-section{padding:30px 16px 80px}
+.seasonal-grid{display:flex;gap:14px;overflow-x:auto;padding:10px 6px}
+.seasonal-card{flex:0 0 190px;background:var(--card-bg);border-radius:10px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;height:320px}
+.seasonal-img{width:100%;height:70%;object-fit:cover}
+.seasonal-content{padding:8px;display:flex;flex-direction:column;justify-content:space-between;height:30%}
+.seasonal-title{font-weight:700;font-size:0.95rem;line-height:1.15;color:var(--text-color)}
+.seasonal-episodes{font-size:0.82rem;color:var(--muted)}
+
+/* Gif */
+.gif{position:fixed;right:12px;bottom:12px;z-index:50;pointer-events:none}
+.gif img{width:120px;height:auto;display:block;opacity:0.95}
+
+/* Footer */
+footer{width:100%;padding:16px 0;background:transparent;color:var(--muted);margin-top:auto}
+.footer-content{max-width:var(--max-width);margin:0 auto;display:flex;gap:12px;align-items:center;justify-content:center}
+.footer-content img{width:22px;height:auto;filter:grayscale(1);opacity:.9}
+
+/* Responsive */
+@media (max-width:900px){
+  .card-image-wrapper{flex-basis:40%}
+  .seasonal-card{flex:0 0 170px;height:300px}
+}
+@media (max-width:720px){
+  .card-image-wrapper{display:block;width:100%;height:260px}
+  .anime-card{flex-direction:column}
+  .menu{display:block}
+  .burger{display:block}
+  .navbar{padding:0 14px}
+  main{padding-top:140px}
+  .gif img{width:80px}
+  .theme-btn{position:absolute;right:16px}
 }
