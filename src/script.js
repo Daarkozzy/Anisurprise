@@ -21,9 +21,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!textoIngles) return "Sinopse indisponível.";
 
         try {
-            // Limita o texto para 500 caracteres (limitação da API gratuita)
             const textoParaTraduzir = textoIngles.substring(0, 500);
-            // API de tradução gratuita
+            
             const url = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(textoParaTraduzir)}&langpair=en|pt`;
             
             const response = await fetch(url);
@@ -37,7 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         } catch (error) {
             console.error("Erro ao traduzir:", error);
-            // Retorna o original se a tradução falhar
+            
             return textoIngles;
         }
     }
@@ -62,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const hasGenre = anime.genres.some(g => g.name.toLowerCase() === genre.toLowerCase());
                     if (!hasGenre) anime = null;
                 }
-                // Garante que é uma série de TV e não um filme, OVA, etc.
+               
                 if (attempts >= maxAttempts) return null;
             } while (!anime || anime.type !== 'TV');
             return anime;
@@ -83,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if(!animeButton) return;
         if (loadingSpinner) loadingSpinner.style.display = 'block';
         
-        // Oculta o botão de gerar enquanto carrega
+        
         if (animeContainer) animeContainer.innerHTML = ''; 
         animeButton.style.display = 'none';
 
@@ -93,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const title = anime.title_english || anime.title;
             const rawSynopsis = anime.synopsis ? anime.synopsis : "Sinopse indisponível.";
             
-            // SINOPSE TRADUZIDA
+            
             const translatedSynopsis = await traduzirTexto(rawSynopsis);
             
             const year = anime.year || '?';
@@ -102,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const episodes = anime.episodes || '?';
             const status = anime.status || 'N/A';
             
-            // LÓGICA DO TRAILER (Link)
+           
             let trailerHTML = '';
             if (anime.trailer && anime.trailer.url) {
                 trailerHTML = `
@@ -179,7 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const image = anime.images.jpg.large_image_url; 
             const episodes = anime.episodes || '?';
             
-            // Define o tipo de informação a ser exibida (Score ou Data de Lançamento)
             const infoBadge = containerId.includes('upcoming') 
                 ? `<span class="seasonal-release-badge">📅 ${anime.aired.string.split(' to ')[0].trim()}</span>` 
                 : `<span class="seasonal-score-badge">⭐ ${score}</span>`;
@@ -202,12 +200,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Função Genérica para buscar dados sazonais/futuros
+    
     async function fetchSeasonalData(endpoint, containerId) {
         const container = document.getElementById(containerId);
         if (!container) return;
         
-        // Limite para Top 10 e filtro para apenas séries de TV
+       
         const url = `https://api.jikan.moe/v4/seasons/${endpoint}?filter=tv&limit=10`;
         
         try {
@@ -223,12 +221,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Função principal para iniciar o carregamento sazonal
+    
     function loadSeasonalData() {
-        // Carrega a temporada atual
+        
         fetchSeasonalData('now', 'current-season-container');
         
-        // Carrega os próximos lançamentos
         fetchSeasonalData('upcoming', 'upcoming-season-container');
     }
 
@@ -257,7 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const toggleBtn = document.getElementById("theme-toggle");
     const html = document.documentElement;
     
-    // Ícones SVG (Sol e Lua)
+    
     const sunIcon = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2">
       <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m6.364.386l-1.591 1.591M21 12h-2.25m-.386 6.364l-1.591-1.591M12 18.75V21m-4.773-4.227l-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0z" />
@@ -299,6 +296,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Chamada inicial para carregar as listas sazonais assim que a página carregar
+    
     loadSeasonalData();
 });
